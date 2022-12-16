@@ -45,6 +45,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200, help_text="Введите название книги", verbose_name="Название книги")
     genre = models.ForeignKey('Genre', on_delete=models.CASCADE, help_text=" Выберите жанр для книги", verbose_name="Жaнp книги", null=True)
     language = models.ForeignKey('Language', on_delete=models.CASCADE, help_text="Выберите язык книги", verbose_name="Язык книги", null=True)
+    author = models.ManyToManyField('Autor', help_text="Выберите автора книги", verbose_name="Aвтop книги")
     summary = models.TextField(max_length=1000, help_text="Введите краткое описание книги", verbose_name="Аннотация книги")
     isbn = models.CharField(max_length=13, help_text="Должно содержать 13 символов", verbose_name="ISBN книги")
 
@@ -59,7 +60,7 @@ class Book(models.Model):
 
 """
 Модель хранения экземпляра книг и их статуса
-
+-----Отношение "многие ко многим"------- 
 """
 
 class Status(models.Model):
