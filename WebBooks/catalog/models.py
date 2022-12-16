@@ -37,7 +37,7 @@ class Autor(models.Model):
         return self.last_name
 
 """
-Модель для хранения книг
+Модель для хранения книг.
 """
 
 
