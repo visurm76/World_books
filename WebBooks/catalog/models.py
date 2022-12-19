@@ -1,13 +1,14 @@
 from django.db import models
 from django.urls import reverse
 
+
 """
 Модель для хранения жанров книг
 """
 class Genre(models.Model):
     name = models.CharField(max_length=200, help_text=" Введите жанр книги", verbose_name="Жaнp книги")
 
-    def str(self):
+    def __str__(self):
         return self.name
 
 
@@ -43,14 +44,19 @@ class Autor(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=200, help_text="Введите название книги", verbose_name="Название книги")
-    genre = models.ForeignKey('Genre', on_delete=models.CASCADE, help_text=" Выберите жанр для книги", verbose_name="Жaнp книги", null=True)
+    genre = models.ForeignKey('Genre', on_delete= models.CASCADE, help_text=" Выберите жанр для книги", verbose_name="Жaнp книги", null=True)
     language = models.ForeignKey('Language', on_delete=models.CASCADE, help_text="Выберите язык книги", verbose_name="Язык книги", null=True)
-    author = models.ManyToManyField('Autor', help_text="Выберите автора книги", verbose_name="Aвтop книги")
+    autor = models.ManyToManyField('Autor', help_text="Выберите автора книги", verbose_name="Aвтop книги")
     summary = models.TextField(max_length=1000, help_text="Введите краткое описание книги", verbose_name="Аннотация книги")
     isbn = models.CharField(max_length=13, help_text="Должно содержать 13 символов", verbose_name="ISBN книги")
 
 
-    def str (self):
+    def display_autor(self):
+        return ', '.join([autor.last_name for autor in self.autor.all()])
+
+        display_autor.short_description = 'Авторы'
+
+    def __str__ (self):
         return self.title
 
     def get_absolute_url(self):
@@ -77,7 +83,7 @@ class Bookinstance(models.Model):
     status = models.ForeignKey('Status', on_delete=models.CASCADE, null=True, help_text='Изменить состояние экземпляра', verbose_name="Cтaтyc экземпляра книги")
     due_back = models.DateField(null=True, blank=True, help_text="Введите конец срока статуса", verbose_name="Дaтa окончания статуса")
 
-    def str(self):
+    def __str__(self):
         return '%s %s %s' % (self.inv_nom, self.book, self.status)
 
 
