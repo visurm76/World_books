@@ -11,7 +11,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     {% block head %}
-    <img src="{% static 'images/logotip.jpg' %}" style="width:lOOpx; height:lOOpx;" align="absmiddle">
+    <img src="{% static 'images/logotip.jpg' %}" style="width:100px; height:100px;" align="absmiddle">
     <font size=7, соlоr="bluе">Сайт "Мир книг"</font>
     {% endblock %}
 </head>
@@ -22,7 +22,7 @@
                     {% block sidebar %}
                     <ul class="sidebar-nav">
                         <li><a href="{% url 'index' %}">Главная страница</a></li>
-                        <li><a href="">Bce книги</a></li>
+                        <li><a href="{% url 'books' %}">Bce книги</a></li>
                         <li><a href="">Bce авторы</a></li>
                     </ul>
                     {% endblock %}
@@ -31,7 +31,7 @@
                     {% block content %}{% endblock %}
                     {% block footer %}
                     {% block copyright %}
-                    <p>Copyright В.И. Сурмин, 2020. Все права защищены</p>
+                    <p>Copyright В.И. Сурмин, 2022 г.. Все права защищены</p>
                     {% endblock %}
                     {% endblock %}
                 </div>
